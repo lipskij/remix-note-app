@@ -7,6 +7,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useCatch,
 } from "@remix-run/react";
 import styles from "~/styles/main.css";
 import Navbar from "~/components/Navbar";
@@ -29,6 +30,35 @@ export default function App() {
           <Navbar />
         </header>
         <Outlet />
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
+    </html>
+  );
+}
+
+export function CatchBoundary() {
+  const coughtResponse = useCatch();
+
+  return (
+    <html lang='en'>
+      <head>
+        <Meta />
+        <Links />
+        <title>{coughtResponse.statusText}</title>
+      </head>
+      <body>
+        <header>
+          <Navbar />
+        </header>
+        <main className='error'>
+          <h1>{coughtResponse.statusText}</h1>
+          <p>{coughtResponse.data?.message || "Oops, something went wrong."}</p>
+          <p>
+            Back to <Link to='/'>safety</Link>!
+          </p>
+        </main>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
