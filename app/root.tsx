@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Link,
   Links,
@@ -9,7 +9,7 @@ import {
   ScrollRestoration,
   useCatch,
 } from "@remix-run/react";
-import styles from "~/styles/main.css";
+import stylesheet from "~/tailwind.css";
 import Navbar from "~/components/Navbar";
 
 export const meta: MetaFunction = () => ({
@@ -52,7 +52,18 @@ export function CatchBoundary() {
         <header>
           <Navbar />
         </header>
-        <main className='error'>
+        <main
+          className='
+        max-w-2xl
+        m-auto
+        mt-10
+        p-4
+        text-center
+        bg-orange-100
+        rounded-md
+        shadow-md
+        '
+        >
           <h1>{coughtResponse.statusText}</h1>
           <p>{coughtResponse.data?.message || "Oops, something went wrong."}</p>
           <p>
@@ -79,7 +90,18 @@ export function ErrorBoundary({ error }: { error: Error }) {
         <header>
           <Navbar />
         </header>
-        <main className='error'>
+        <main
+          className='
+        max-w-2xl
+        m-auto
+        mt-10
+        p-4
+        text-center
+        bg-orange-100
+        rounded-md
+        shadow-md
+        '
+        >
           <h1>An error occurred!</h1>
           <p>{error.message}</p>
           <p>
@@ -94,6 +116,6 @@ export function ErrorBoundary({ error }: { error: Error }) {
   );
 }
 
-export function links() {
-  return [{ rel: "stylesheet", href: styles }];
-}
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: stylesheet },
+];

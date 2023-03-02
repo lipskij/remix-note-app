@@ -1,7 +1,7 @@
 import { json, redirect } from "@remix-run/node";
 import { Link, useCatch, useLoaderData } from "@remix-run/react";
-import NewNote, { links as newNoteLinks } from "~/components/NewNote";
-import NoteList, { links as noteListLinks } from "~/components/NoteList";
+import NewNote from "~/components/NewNote";
+import NoteList from "~/components/NoteList";
 import { getStoredNotes, storeNotes } from "~/data/notes";
 
 const NotesPage: React.FC = () => {
@@ -53,10 +53,6 @@ export async function action({ request }: { request: Request }) {
 
 export default NotesPage;
 
-export function links() {
-  return [...newNoteLinks(), ...noteListLinks()];
-}
-
 export function meta() {
   return {
     title: "All Notes",
@@ -70,14 +66,34 @@ export function CatchBoundary() {
   return (
     <main>
       <NewNote />
-      <p className='info-message'>{message}</p>
+      <p
+        className='
+      m-4
+      text-center
+      text-gray-700
+      text-xl
+      '
+      >
+        {message}
+      </p>
     </main>
   );
 }
 
 export function ErrorBoundary({ error }: { error: Error }) {
   return (
-    <main className='error'>
+    <main
+      className='
+    max-w-2xl
+    m-auto
+    mt-10
+    p-4
+    text-center
+    bg-orange-100
+    rounded-md
+    shadow-md
+    '
+    >
       <p>An error related to your notes occurred!</p>
       <p>{error.message}</p>
       <p>

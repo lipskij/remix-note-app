@@ -1,5 +1,4 @@
 import { Link } from "@remix-run/react";
-import styles from "./NoteList.css";
 
 interface NoteProps {
   notes: {
@@ -11,13 +10,52 @@ interface NoteProps {
 
 const NoteList: React.FC<NoteProps> = ({ notes }) => {
   return (
-    <ul id='note-list'>
+    <ul
+      id='note-list'
+      className='
+    flex
+    flex-wrap
+    justify-center
+    gap-5
+    m-auto
+    max-w-5xl
+    h-56
+    text-gray-700
+    '
+    >
       {notes.map((note, index) => (
-        <li key={note.id} className='note'>
+        <li
+          key={note.id}
+          className='
+        w-2/5
+        bg-blue-100
+        text-gray
+        shadow-md
+        p-4
+        rounded-md
+        animate-fade-in
+        hover:bg-blue-200
+        hover:translate-y-1
+        ease-in duration-200
+        '
+        >
           <Link to={note.id}>
             <article>
               <header>
-                <ul className='note-meta'>
+                <ul
+                  className='
+                flex
+                p-0
+                justify-between
+                items-center
+                text-gray-500
+                font-bold
+                pb-4
+                mb-4
+                border-b
+                border-gray-500
+                m-0'
+                >
                   <li>#{index + 1}</li>
                   <li>
                     <time dateTime={note.id}>
@@ -31,9 +69,27 @@ const NoteList: React.FC<NoteProps> = ({ notes }) => {
                     </time>
                   </li>
                 </ul>
-                <h2>{note.title}</h2>
+                <h2
+                  className='
+                m-2
+                text-gray-700
+                '
+                >
+                  {note.title}
+                </h2>
               </header>
-              <p>{note.content}</p>
+              <p
+                className='
+              m-0
+              text-gray-700
+              nowrap
+              overflow-hidden
+              text-overflow-ellipsis
+              w-full
+              '
+              >
+                {note.content}
+              </p>
             </article>
           </Link>
         </li>
@@ -43,7 +99,3 @@ const NoteList: React.FC<NoteProps> = ({ notes }) => {
 };
 
 export default NoteList;
-
-export function links() {
-  return [{ rel: "stylesheet", href: styles }];
-}
