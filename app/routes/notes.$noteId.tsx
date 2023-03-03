@@ -8,16 +8,16 @@ const NoteDetailsPage: React.FC = () => {
     <main
       id='note-details'
       className='
-    max-w-2xl
     m-auto
     mt-10
-    p-4
-    items-center
-    text-gray-700
-    text-center
-    bg-blue-100
-    rounded-md
+    max-w-2xl
     animate-fade-slide-in
+    items-center
+    rounded-md
+    bg-blue-100
+    p-4
+    text-center
+    text-gray-700
     '
     >
       <header>
@@ -31,8 +31,8 @@ const NoteDetailsPage: React.FC = () => {
         >
           <Link
             className='
-          text-gray-700
           p-2
+          text-gray-700
           hover:text-gray-500
           '
             to='/notes'
@@ -44,9 +44,9 @@ const NoteDetailsPage: React.FC = () => {
       </header>
       <p
         className='
-      text-gray-700
-      text-xl
       pre-wrap
+      text-xl
+      text-gray-700
       '
       >
         {note.content}

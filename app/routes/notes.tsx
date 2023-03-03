@@ -86,8 +86,8 @@ export function CatchBoundary() {
         className='
       m-4
       text-center
-      text-gray-700
       text-xl
+      text-gray-700
       '
       >
         {message}
@@ -100,13 +100,13 @@ export function ErrorBoundary({ error }: { error: Error }) {
   return (
     <main
       className='
-    max-w-2xl
     m-auto
     mt-10
+    max-w-2xl
+    rounded-md
+    bg-orange-100
     p-4
     text-center
-    bg-orange-100
-    rounded-md
     shadow-md
     '
     >

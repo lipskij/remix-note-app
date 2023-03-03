@@ -2,17 +2,17 @@ import { Link } from "@remix-run/react";
 
 const Index: React.FC = () => {
   return (
-    <main id='content' className='text-center p-10'>
-      <h1 className='text-gray-700 text-4xl p-4'>Keep track of your notes</h1>
-      <p className='text-gray-700 text-2xl p-4'>
+    <main id='content' className='p-10 text-center'>
+      <h1 className='p-4 text-4xl text-gray-700'>Keep track of your notes</h1>
+      <p className='p-4 text-2xl text-gray-700'>
         Try our early beta never loose track of your notes again!
       </p>
       <p
         id='cta'
-        className='text-gray-700 text-2xl p-4  hover:scale-105 transi ease-out duration-200'
+        className='transi p-4 text-2xl  text-gray-700 duration-200 ease-out hover:scale-105'
       >
         <Link
-          className='bg-gray-200 p-2 border-solid border-gray-700 border-2 rounded-lg hover:shadow-xl hover:bg-orange-200'
+          className='rounded-lg border-2 border-solid border-gray-700 bg-gray-200 p-2 hover:bg-orange-200 hover:shadow-xl'
           to='/notes'
         >
           Try Now!

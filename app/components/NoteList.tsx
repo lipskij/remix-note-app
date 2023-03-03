@@ -13,13 +13,13 @@ const NoteList: React.FC<NoteProps> = ({ notes }) => {
     <ul
       id='note-list'
       className='
+    m-auto
     flex
+    h-56
+    max-w-5xl
     flex-wrap
     justify-center
     gap-5
-    m-auto
-    max-w-5xl
-    h-56
     text-gray-700
     '
     >
@@ -27,16 +27,16 @@ const NoteList: React.FC<NoteProps> = ({ notes }) => {
         <li
           key={note.id}
           className='
-        w-2/5
-        bg-blue-100
         text-gray
-        shadow-md
-        p-4
-        rounded-md
+        w-2/5
         animate-fade-in
-        hover:bg-blue-200
-        hover:translate-y-1
-        ease-in duration-200
+        rounded-md
+        bg-blue-100
+        p-4
+        shadow-md
+        duration-200
+        ease-in
+        hover:translate-y-1 hover:bg-blue-200
         '
         >
           <Link prefetch='intent' to={note.id}>
@@ -44,17 +44,17 @@ const NoteList: React.FC<NoteProps> = ({ notes }) => {
               <header>
                 <ul
                   className='
-                flex
-                p-0
-                justify-between
-                items-center
-                text-gray-500
-                font-bold
-                pb-4
+                m-0
                 mb-4
+                flex
+                items-center
+                justify-between
                 border-b
                 border-gray-500
-                m-0'
+                p-0
+                pb-4
+                font-bold
+                text-gray-500'
                 >
                   <li>#{index + 1}</li>
                   <li>
@@ -80,12 +80,12 @@ const NoteList: React.FC<NoteProps> = ({ notes }) => {
               </header>
               <p
                 className='
-              m-0
-              text-gray-700
               nowrap
-              overflow-hidden
               text-overflow-ellipsis
+              m-0
               w-full
+              overflow-hidden
+              text-gray-700
               '
               >
                 {note.content}
@@ -100,14 +100,14 @@ const NoteList: React.FC<NoteProps> = ({ notes }) => {
                 type='submit'
                 value='delete'
                 className='
-          p-2
-          bg-red-500
-          rounded-md
           mt-4
+          rounded-md
+          bg-red-500
+          p-2
           text-white
-          hover:shadow-lg
-          hover:scale-105
           duration-200
+          hover:scale-105
+          hover:shadow-lg
           '
               >
                 Delete
