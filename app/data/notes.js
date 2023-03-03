@@ -10,3 +10,9 @@ export async function getStoredNotes() {
 export function storeNotes(notes) {
   return fs.writeFile("notes.json", JSON.stringify({ notes: notes || [] }));
 }
+
+export async function deleteNoteById(id) {
+  const notes = await getStoredNotes();
+  const updatedNotes = notes.filter((note) => note.id !== id);
+  await storeNotes(updatedNotes);
+}

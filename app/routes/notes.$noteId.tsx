@@ -1,7 +1,19 @@
-import { json } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
-import { getStoredNotes } from "~/data/notes";
-// import styles from "~/styles/note-details.css";
+import type { ActionArgs } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
+import { Form, Link, useLoaderData } from "@remix-run/react";
+import { deleteNoteById, getStoredNotes } from "~/data/notes";
+
+export const action = async ({ params, request }: ActionArgs) => {
+  const form = await request.formData();
+  if (form.get("intent") !== "delete") {
+    throw new Response(`The intent ${form.get("intent")} is not supported`, {
+      status: 400,
+    });
+  }
+
+  await deleteNoteById(params.noteId);
+  return redirect("/notes");
+};
 
 const NoteDetailsPage: React.FC = () => {
   const note = useLoaderData();
@@ -43,11 +55,37 @@ const NoteDetailsPage: React.FC = () => {
         </nav>
         <h1>{note.title}</h1>
       </header>
-      <p className='
+      <p
+        className='
       text-gray-700
       text-xl
       pre-wrap
-      '>{note.content}</p>
+      '
+      >
+        {note.content}
+      </p>
+
+      <div>
+        <Form method='post'>
+          <button
+            name='intent'
+            type='submit'
+            value='delete'
+            className='
+          p-2
+          bg-red-500
+          rounded-md
+          mt-4
+          text-white
+          hover:shadow-lg
+          hover:scale-105
+          duration-200
+          '
+          >
+            Delete
+          </button>
+        </Form>
+      </div>
     </main>
   );
 };
