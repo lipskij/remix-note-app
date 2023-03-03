@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
 
 interface NoteProps {
   notes: {
@@ -39,7 +39,7 @@ const NoteList: React.FC<NoteProps> = ({ notes }) => {
         ease-in duration-200
         '
         >
-          <Link to={note.id}>
+          <Link prefetch='intent' to={note.id}>
             <article>
               <header>
                 <ul
@@ -92,6 +92,28 @@ const NoteList: React.FC<NoteProps> = ({ notes }) => {
               </p>
             </article>
           </Link>
+          <div>
+            <Form method='post'>
+              <input type='hidden' name='id' value={note.id} />
+              <button
+                name='intent'
+                type='submit'
+                value='delete'
+                className='
+          p-2
+          bg-red-500
+          rounded-md
+          mt-4
+          text-white
+          hover:shadow-lg
+          hover:scale-105
+          duration-200
+          '
+              >
+                Delete
+              </button>
+            </Form>
+          </div>
         </li>
       ))}
     </ul>

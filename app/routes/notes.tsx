@@ -2,7 +2,7 @@ import { json, redirect } from "@remix-run/node";
 import { Link, useCatch, useLoaderData } from "@remix-run/react";
 import NewNote from "~/components/NewNote";
 import NoteList from "~/components/NoteList";
-import { getStoredNotes, storeNotes } from "~/data/notes";
+import { deleteNoteById, getStoredNotes, storeNotes } from "~/data/notes";
 
 const NotesPage: React.FC = () => {
   const notes = useLoaderData();
@@ -28,26 +28,42 @@ export async function loader() {
 
 export async function action({ request }: { request: Request }) {
   const formData = await request.formData();
-  const noteData = Object.fromEntries(formData.entries());
 
-  const title = noteData.title as string;
-  const content = noteData.content as string;
-  if (title.length < 5) {
-    return {
-      message: "Title is too short - must be at least 5 characters long",
-    };
+  if (formData.get("intent") === "delete") {
+    const noteId = Object.fromEntries(formData.entries());
+
+    if (!noteId.id) {
+      throw new Response(`Note that you want to delete is not found.`, {
+        status: 400,
+      });
+    }
+    await deleteNoteById(noteId.id as string);
+    return redirect("/notes");
   }
 
-  if (content.length < 5) {
-    return {
-      message: "Content is too short - must be at least 5 characters long",
-    };
-  }
+  if (formData.get("intent") === "create") {
+    const noteData = Object.fromEntries(formData.entries());
 
-  const existingNotes = await getStoredNotes();
-  noteData.id = new Date().toISOString();
-  const updatedNotes = [...existingNotes, noteData];
-  await storeNotes(updatedNotes);
+    const title = noteData.title as string;
+    const content = noteData.content as string;
+    if (title.length < 5) {
+      return {
+        message: "Title is too short - must be at least 5 characters long",
+      };
+    }
+
+    if (content.length < 5) {
+      return {
+        message: "Content is too short - must be at least 5 characters long",
+      };
+    }
+
+    const existingNotes = await getStoredNotes();
+    noteData.id = new Date().toISOString();
+    const updatedNotes = [...existingNotes, noteData];
+    await storeNotes(updatedNotes);
+    return redirect("/notes");
+  }
   return redirect("/notes");
 }
 

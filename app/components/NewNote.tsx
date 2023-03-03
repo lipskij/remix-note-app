@@ -2,9 +2,7 @@ import { Form, useActionData, useNavigation } from "@remix-run/react";
 
 const NewNote: React.FC = () => {
   const data = useActionData();
-  const navigation = useNavigation();
 
-  const isSubmitting = navigation.state === "submitting";
   return (
     <Form
       method='post'
@@ -44,10 +42,12 @@ const NewNote: React.FC = () => {
       </p>
       <div className='text-center mt-5'>
         <button
-          disabled={isSubmitting}
+          name='intent'
+          type='submit'
+          value='create'
           className='disabled:bg-gray-300 disabled:cursor-not-allowed p-4 border-solid border-2 rounded-md text-gray-700 font-bold hover:scale-105 ease-out duration-200'
         >
-          {isSubmitting ? "Adding..." : "Add Note"}
+          Add Note
         </button>
       </div>
     </Form>
